@@ -4,8 +4,13 @@ class UfsController < ApplicationController
   # GET /ufs
   def index
     @ufs = Uf.all
+    if User.exists?(:name => request.headers["X-CLIENTE"]) 
+      render json: @ufs
+    end
+  end
 
-    render json: @ufs
+  def mostrar_uf
+    puts params[:fecha]
   end
 
   # GET /ufs/1
