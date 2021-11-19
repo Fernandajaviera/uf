@@ -10,7 +10,10 @@ class UfsController < ApplicationController
   end
 
   def mostrar_uf
-    puts params[:fecha]
+    if User.exists?(:name => request.headers["X-CLIENTE"]) 
+      @uf = Uf.where(fecha: params[:fecha])
+      render json: @uf
+    end
   end
 
   # GET /ufs/1
