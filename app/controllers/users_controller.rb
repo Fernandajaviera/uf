@@ -7,6 +7,12 @@ class UsersController < ApplicationController
     render json: @users
   end
 
+  def mostrar_visitas
+    @user = User.where(name: params[:nombre])
+    render json: @user
+  
+  end
+
   # GET /users/1
   def show
     render json: @user

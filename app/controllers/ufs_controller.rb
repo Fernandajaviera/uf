@@ -10,7 +10,9 @@ class UfsController < ApplicationController
   end
 
   def mostrar_uf
-    if User.exists?(:name => request.headers["X-CLIENTE"]) 
+    if User.exists?(:name => request.headers["X-CLIENTE"])
+      usuario = User.where(name: request.headers["X-CLIENTE"])
+      usuario.increment_counter(:views, 1) 
       @uf = Uf.where(fecha: params[:fecha])
       render json: @uf
     end
